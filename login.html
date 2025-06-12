@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connexion Rankos - TikTok</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion TikTok</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      background: #fff;
+      background-color: #fff;
       color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
     }
 
     header {
-      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 16px 32px;
+      border-bottom: 1px solid #eee;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      font-size: 24px;
       font-weight: bold;
+      font-size: 20px;
     }
 
     .logo img {
@@ -41,123 +38,131 @@
       margin-right: 8px;
     }
 
-    .help {
+    .help-link {
       font-size: 14px;
-      color: #333;
       text-decoration: none;
-    }
-
-    .container, .login-interface {
-      text-align: center;
-      margin-top: 80px;
-      max-width: 400px;
-      width: 100%;
-    }
-
-    .btn {
-      width: 100%;
-      border: 1px solid #ccc;
-      background-color: #fff;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      font-size: 16px;
+      color: #333;
       display: flex;
       align-items: center;
-      justify-content: center;
+    }
+
+    .help-link::before {
+      content: "❓";
+      margin-right: 6px;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .login-box {
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .login-box h1 {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .tabs span {
       cursor: pointer;
     }
 
-    .btn img {
-      height: 20px;
-      margin-right: 10px;
+    .tabs .active {
+      font-weight: bold;
+      color: #000;
     }
 
-    .badge {
-      background-color: #00f0f0;
-      color: white;
-      padding: 2px 6px;
-      border-radius: 8px;
-      font-size: 12px;
-      margin-left: 10px;
+    .input-group {
+      display: flex;
+      flex-direction: column;
     }
 
-    .terms {
-      font-size: 11px;
-      color: #999;
-      margin-top: 20px;
-    }
-
-    .signup {
-      margin-top: 40px;
-      font-size: 14px;
-    }
-
-    .signup a {
-      color: red;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .login-interface {
-      display: none;
-      max-width: 400px;
-      width: 100%;
-      margin-top: 100px;
-    }
-
-    .login-interface h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .login-interface p {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 20px;
-    }
-
-    .login-interface select, .login-interface input {
+    .input-group input {
       padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
       margin-bottom: 10px;
-      font-size: 16px;
-      width: 100%;
     }
 
-    .password-group {
+    .input-group .password-wrapper {
       position: relative;
+    }
+
+    .password-wrapper input {
+      width: 100%;
+      padding-right: 40px;
     }
 
     .toggle-password {
       position: absolute;
       right: 12px;
-      top: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
+      color: #999;
     }
 
-    .login-actions {
-      text-align: right;
+    .forgot {
       font-size: 12px;
-      margin-bottom: 20px;
+      text-align: left;
+      margin-bottom: 16px;
+      color: #333;
     }
 
-    .connect-button {
-      background-color: #eee;
-      border: none;
-      padding: 12px;
+    .login-btn {
       width: 100%;
-      border-radius: 8px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #eee;
+      color: #999;
       font-weight: bold;
-      cursor: pointer;
+      cursor: not-allowed;
     }
 
     .back-link {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #000;
       margin-top: 20px;
       cursor: pointer;
-      color: #000;
+    }
+
+    .back-link::before {
+      content: "←";
+      margin-right: 6px;
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    footer a {
+      color: #fe2c55;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 4px;
     }
   </style>
 </head>
@@ -165,92 +170,45 @@
 
 <header>
   <div class="logo">
-    <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok" />
+    <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok Logo">
     TikTok
   </div>
-  <a class="help" href="#">Commentaires et assistance</a>
+  <a href="#" class="help-link">Commentaires et assistance</a>
 </header>
 
-<!-- Page principale -->
-<div class="container" id="mainInterface">
-  <h1>Connecte-toi au site de</h1>
-  <h2>Rankos</h2>
-  <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
+<main>
+  <div class="login-box">
+    <h1>Se connecter</h1>
+    <div class="tabs">
+      <span class="active">E-mail ou nom d'utilisateur</span>
+      <span>Connexion avec un numéro de téléphone</span>
+    </div>
 
-  <div class="btn">
-    <img src="https://img.icons8.com/material-outlined/24/000000/qr-code.png" alt="QR Code" />
-    Utiliser un code QR
+    <div class="input-group">
+      <input type="text" placeholder="E-mail ou nom d'utilisateur">
+      <div class="password-wrapper">
+        <input type="password" placeholder="Mot de passe" id="passwordField">
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+    </div>
+
+    <div class="forgot">
+      <a href="#">Mot de passe oublié ?</a>
+    </div>
+
+    <button class="login-btn" disabled>Se connecter</button>
+
+    <div class="back-link" onclick="window.history.back()">Retour</div>
   </div>
+</main>
 
-  <div class="btn" onclick="showLogin()">
-    <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
-    Utiliser le téléphone/l’e-mail/le nom d’utilisateur
-    <span class="badge">Dernière connexion</span>
-  </div>
-
-  <div class="btn">
-    <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" />
-    Continuer avec Facebook
-  </div>
-
-  <div class="btn">
-    <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
-    Continuer avec Google
-  </div>
-
-  <p class="terms">
-    En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> du site de Rankos et confirmes avoir lu la <a href="#">Politique de confidentialité</a>.
-  </p>
-
-  <div class="signup">
-    Tu n'as pas de compte ? <a href="#">S'inscrire</a>
-  </div>
-</div>
-
-<!-- Interface de connexion -->
-<div class="login-interface" id="loginInterface">
-  <h1>Se connecter</h1>
-  <p><strong>Téléphone</strong><span style="font-size: 12px;"> Connexion avec une adresse e-mail ou un nom d'utilisateur</span></p>
-
-  <div style="display: flex; gap: 10px;">
-    <select>
-      <option value="FR">FR +33</option>
-      <option value="BE">BE +32</option>
-      <option value="CH">CH +41</option>
-    </select>
-    <input type="text" placeholder="Numéro de téléphone">
-  </div>
-
-  <div class="password-group">
-    <input type="password" id="passwordInput" placeholder="Mot de passe">
-    <span class="toggle-password" onclick="togglePassword()">👁️</span>
-  </div>
-
-  <div class="login-actions">
-    <a href="#">Mot de passe oublié ?</a> | <a href="#">Connexion avec un code</a>
-  </div>
-
-  <button class="connect-button">Se connecter</button>
-
-  <div class="back-link" onclick="showMain()">← Retour</div>
-  <div class="signup" style="margin-top: 30px;">
-    Tu n'as pas de compte ? <a href="#">S'inscrire</a>
-  </div>
-</div>
+<footer>
+  Tu n'as pas de compte ?<a href="#"> S'inscrire</a>
+</footer>
 
 <script>
-  function showLogin() {
-    document.getElementById("mainInterface").style.display = "none";
-    document.getElementById("loginInterface").style.display = "block";
-  }
-
-  function showMain() {
-    document.getElementById("loginInterface").style.display = "none";
-    document.getElementById("mainInterface").style.display = "block";
-  }
-
   function togglePassword() {
-    const input = document.getElementById("passwordInput");
+    const input = document.getElementById("passwordField");
     input.type = input.type === "password" ? "text" : "password";
   }
 </script>
