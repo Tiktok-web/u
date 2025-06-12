@@ -1,156 +1,161 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Connexion TikTok - Email ou téléphone</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset basique */
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Connexion TikTok - Email ou téléphone</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* Reset et base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+    background: #fff;
+    color: #161823;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 60px 20px 40px;
+  }
+  main {
+    width: 380px;
+  }
 
-    body {
-      background-color: #fff;
-      color: #161823;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 20px;
-    }
+  /* Logo centré */
+  .logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .logo img {
+    height: 40px;
+  }
 
-    main {
-      width: 380px;
-      border: 1px solid #e6e6e6;
-      border-radius: 12px;
-      padding: 32px 32px 24px;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
-    }
+  /* Titre principal */
+  h1 {
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
 
-    header {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
+  /* Sous-titre */
+  .subtitle {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: #161823;
+    margin-bottom: 32px;
+  }
 
-    header img {
-      height: 40px;
-    }
+  /* Formulaire */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
-    h1 {
-      font-weight: 600;
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #161823;
-    }
+  label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
 
-    form {
-      display: flex;
-      flex-direction: column;
-    }
+  input[type="text"],
+  input[type="password"] {
+    font-size: 16px;
+    height: 44px;
+    padding: 0 48px 0 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    color: #161823;
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease;
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    outline: none;
+    border-color: #fe2c55;
+    box-shadow: 0 0 0 3px rgb(254 44 85 / 0.3);
+  }
 
-    label {
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #161823;
-    }
+  /* Wrapper pour mot de passe + bouton afficher */
+  .password-wrapper {
+    position: relative;
+  }
 
-    input[type="text"],
-    input[type="password"] {
-      height: 44px;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: 1px solid #e6e6e6;
-      font-size: 16px;
-      color: #161823;
-      margin-bottom: 12px;
-      transition: border-color 0.2s ease;
-    }
+  .toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+    font-size: 14px;
+    color: #fe2c55;
+    cursor: pointer;
+    user-select: none;
+  }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      border-color: #fe2c55;
-      box-shadow: 0 0 0 3px rgb(254 44 85 / 0.3);
-    }
+  /* Bouton connexion */
+  button {
+    margin-top: 12px;
+    background-color: #fe2c55;
+    border: none;
+    border-radius: 8px;
+    height: 44px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:disabled {
+    background-color: #f3a6b7;
+    cursor: not-allowed;
+  }
 
-    .error-message {
-      color: #fe2c55;
-      font-size: 12px;
-      min-height: 18px;
-      margin-bottom: 12px;
-    }
+  /* Lien mot de passe oublié */
+  .forgot-password {
+    display: block;
+    margin: 16px 0 32px;
+    font-size: 14px;
+    color: #fe2c55;
+    text-decoration: none;
+  }
 
-    .toggle-password {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      user-select: none;
-      color: #666;
-    }
+  /* Message d'erreur */
+  .error-message {
+    color: #fe2c55;
+    font-size: 12px;
+    min-height: 18px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+  }
 
-    .password-wrapper {
-      position: relative;
-      margin-bottom: 12px;
-    }
-
-    button {
-      margin-top: 8px;
-      background-color: #fe2c55;
-      color: white;
-      border: none;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 6px;
-      height: 44px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-
-    button:disabled {
-      background-color: #f3a6b7;
-      cursor: not-allowed;
-    }
-
-    a.forgot-password {
-      font-size: 14px;
-      color: #fe2c55;
-      text-decoration: none;
-      margin-top: 16px;
-      margin-bottom: 28px;
-      display: inline-block;
-    }
-
-    .signup-text {
-      font-size: 14px;
-      text-align: center;
-      color: #161823;
-    }
-
-    .signup-text a {
-      color: #fe2c55;
-      font-weight: 600;
-      text-decoration: none;
-      margin-left: 4px;
-    }
-  </style>
+  /* Texte inscription */
+  .signup-text {
+    font-size: 14px;
+    color: #161823;
+    text-align: center;
+  }
+  .signup-text a {
+    color: #fe2c55;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+</style>
 </head>
 <body>
   <main>
-    <header>
+    <div class="logo">
       <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok Logo" />
-    </header>
-    <h1>Se connecter à TikTok</h1>
+    </div>
+    <h1>Connexion</h1>
+    <div class="subtitle">Utiliser e-mail / téléphone / nom d'utilisateur</div>
     <form id="loginForm" novalidate>
       <label for="emailOrPhone">E-mail ou nom d'utilisateur</label>
       <input
@@ -173,17 +178,17 @@
           autocomplete="current-password"
           required
         />
-        <span class="toggle-password" id="togglePassword" aria-label="Afficher ou masquer le mot de passe">👁️</span>
+        <span class="toggle-password" id="togglePassword" aria-label="Afficher ou masquer le mot de passe">Afficher</span>
       </div>
       <div class="error-message" id="passwordError"></div>
 
       <a href="#" class="forgot-password">Mot de passe oublié ?</a>
 
-      <button type="submit" id="submitBtn" disabled>Se connecter</button>
+      <button type="submit" id="submitBtn" disabled>Connexion</button>
     </form>
     <p class="signup-text">
       Tu n'as pas de compte ?
-      <a href="#">S'inscrire</a>
+      <a href="#">Inscris-toi</a>
     </p>
   </main>
 
@@ -228,11 +233,7 @@
       emailOrPhoneError.textContent = emailValidationMsg;
       passwordError.textContent = passwordValidationMsg;
 
-      if (!emailValidationMsg && !passwordValidationMsg) {
-        submitBtn.disabled = false;
-      } else {
-        submitBtn.disabled = true;
-      }
+      submitBtn.disabled = !!(emailValidationMsg || passwordValidationMsg);
     }
 
     emailOrPhoneInput.addEventListener('input', updateButtonState);
@@ -241,10 +242,10 @@
     togglePassword.addEventListener('click', () => {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        togglePassword.textContent = '🙈';
+        togglePassword.textContent = 'Masquer';
       } else {
         passwordInput.type = 'password';
-        togglePassword.textContent = '👁️';
+        togglePassword.textContent = 'Afficher';
       }
     });
 
@@ -254,7 +255,7 @@
       const emailVal = emailOrPhoneInput.value.trim();
       const passwordVal = passwordInput.value.trim();
 
-      // Final validation avant envoi
+      // Validation finale
       const emailValidationMsg = validateInput(emailVal);
       const passwordValidationMsg = validatePassword(passwordVal);
 
