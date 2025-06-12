@@ -47,7 +47,7 @@
       text-decoration: none;
     }
 
-    .container {
+    .container, .login-interface {
       text-align: center;
       margin-top: 80px;
       max-width: 400px;
@@ -116,51 +116,125 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+    .login-interface {
+      display: none;
+      flex-direction: column;
+    }
+
+    .input-group {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .connect-button {
+      background-color: #eee;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      cursor: pointer;
+      color: #000;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok" />
-      TikTok
-    </div>
-    <a class="help" href="#">Commentaires et assistance</a>
-  </header>
-
-  <div class="container">
-    <h1>Connecte-toi au site de</h1>
-    <h2>Rankos</h2>
-    <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
-
-    <div class="btn">
-      <img src="https://img.icons8.com/material-outlined/24/000000/qr-code.png" alt="QR Code" />
-      Utiliser un code QR
-    </div>
-
-    <div class="btn">
-      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
-      Utiliser le téléphone/l’e-mail/le nom d’utilisateur
-      <span class="badge">Dernière connexion</span>
-    </div>
-
-    <div class="btn">
-      <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" />
-      Continuer avec Facebook
-    </div>
-
-    <div class="btn">
-      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
-      Continuer avec Google
-    </div>
-
-    <p class="terms">
-      En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> du site de rankos et confirmes avoir lu la <a href="#">Politique de confidentialité</a> du site de Rankos.
-    </p>
-
-    <div class="signup">
-      Tu n'as pas de compte ? <a href="#">S'inscrire</a>
-    </div>
+<header>
+  <div class="logo">
+    <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok" />
+    TikTok
   </div>
+  <a class="help" href="#">Commentaires et assistance</a>
+</header>
+
+<!-- Page principale -->
+<div class="container" id="mainInterface">
+  <h1>Connecte-toi au site de</h1>
+  <h2>Rankos</h2>
+  <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
+
+  <div class="btn">
+    <img src="https://img.icons8.com/material-outlined/24/000000/qr-code.png" alt="QR Code" />
+    Utiliser un code QR
+  </div>
+
+  <div class="btn" onclick="showLogin()">
+    <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
+    Utiliser le téléphone/l’e-mail/le nom d’utilisateur
+    <span class="badge">Dernière connexion</span>
+  </div>
+
+  <div class="btn">
+    <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" />
+    Continuer avec Facebook
+  </div>
+
+  <div class="btn">
+    <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+    Continuer avec Google
+  </div>
+
+  <p class="terms">
+    En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> du site de Rankos et confirmes avoir lu la <a href="#">Politique de confidentialité</a>.
+  </p>
+
+  <div class="signup">
+    Tu n'as pas de compte ? <a href="#">S'inscrire</a>
+  </div>
+</div>
+
+<!-- Interface de connexion -->
+<div class="login-interface" id="loginInterface">
+  <h1>Se connecter</h1>
+  <p>Connexion avec une adresse e-mail ou un nom d'utilisateur</p>
+
+  <div class="input-group">
+    <select style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px;">
+      <option value="FR">FR +33</option>
+      <option value="BE">BE +32</option>
+      <option value="CH">CH +41</option>
+    </select>
+    <input type="text" placeholder="Numéro de téléphone">
+  </div>
+
+  <div class="input-group">
+    <input type="password" placeholder="Mot de passe">
+  </div>
+
+  <div style="text-align: right; font-size: 12px;">
+    <a href="#">Mot de passe oublié ?</a> | <a href="#">Connexion avec un code</a>
+  </div>
+
+  <button class="connect-button">Se connecter</button>
+
+  <div class="back-link" onclick="showMain()">← Retour</div>
+</div>
+
+<script>
+  function showLogin() {
+    document.getElementById("mainInterface").style.display = "none";
+    document.getElementById("loginInterface").style.display = "flex";
+  }
+
+  function showMain() {
+    document.getElementById("loginInterface").style.display = "none";
+    document.getElementById("mainInterface").style.display = "block";
+  }
+</script>
+
 </body>
 </html>
