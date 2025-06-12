@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion TikTok</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
 
@@ -34,78 +34,74 @@
     }
 
     .logo img {
-      height: 24px;
+      height: 28px;
       margin-right: 8px;
     }
 
-    .help-link {
+    .help {
       font-size: 14px;
-      text-decoration: none;
       color: #333;
-      display: flex;
-      align-items: center;
+      text-decoration: none;
     }
 
-    .help-link::before {
+    .help::before {
       content: "❓";
-      margin-right: 6px;
+      margin-right: 5px;
     }
 
     main {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 20px;
+      justify-content: center;
+      margin-top: 60px;
+      padding: 20px;
     }
 
-    .login-box {
+    .form-container {
       max-width: 360px;
       width: 100%;
     }
 
-    .login-box h1 {
-      font-size: 24px;
-      font-weight: 700;
+    .form-container h1 {
       text-align: center;
+      font-size: 26px;
+      font-weight: 700;
       margin-bottom: 24px;
     }
 
     .tabs {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 16px;
       font-size: 14px;
-      color: #555;
+      margin-bottom: 16px;
     }
 
     .tabs span {
+      color: #666;
       cursor: pointer;
     }
 
     .tabs .active {
-      font-weight: bold;
+      font-weight: 600;
       color: #000;
     }
 
     .input-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .input-group input {
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
       margin-bottom: 10px;
     }
 
-    .input-group .password-wrapper {
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .password-container {
       position: relative;
     }
 
-    .password-wrapper input {
-      width: 100%;
+    .password-container input {
       padding-right: 40px;
     }
 
@@ -115,34 +111,34 @@
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #999;
+      color: #888;
+      font-size: 16px;
     }
 
     .forgot {
-      font-size: 12px;
-      text-align: left;
+      font-size: 13px;
       margin-bottom: 16px;
       color: #333;
     }
 
-    .login-btn {
+    .submit-btn {
       width: 100%;
       padding: 12px;
+      background-color: #f1f1f1;
+      color: #999;
       border: none;
       border-radius: 6px;
-      background-color: #eee;
-      color: #999;
       font-weight: bold;
       cursor: not-allowed;
+      margin-bottom: 16px;
     }
 
     .back-link {
+      font-size: 14px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      font-size: 14px;
       color: #000;
-      margin-top: 20px;
-      cursor: pointer;
     }
 
     .back-link::before {
@@ -151,17 +147,17 @@
     }
 
     footer {
-      margin-top: 80px;
       text-align: center;
       font-size: 14px;
+      margin-top: 80px;
       border-top: 1px solid #eee;
       padding-top: 20px;
     }
 
     footer a {
       color: #fe2c55;
-      text-decoration: none;
       font-weight: 500;
+      text-decoration: none;
       margin-left: 4px;
     }
   </style>
@@ -170,14 +166,14 @@
 
 <header>
   <div class="logo">
-    <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok Logo">
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0a/TikTok_logo.svg" alt="TikTok">
     TikTok
   </div>
-  <a href="#" class="help-link">Commentaires et assistance</a>
+  <a href="#" class="help">Commentaires et assistance</a>
 </header>
 
 <main>
-  <div class="login-box">
+  <div class="form-container">
     <h1>Se connecter</h1>
     <div class="tabs">
       <span class="active">E-mail ou nom d'utilisateur</span>
@@ -186,30 +182,31 @@
 
     <div class="input-group">
       <input type="text" placeholder="E-mail ou nom d'utilisateur">
-      <div class="password-wrapper">
-        <input type="password" placeholder="Mot de passe" id="passwordField">
-        <span class="toggle-password" onclick="togglePassword()">👁️</span>
-      </div>
+    </div>
+
+    <div class="input-group password-container">
+      <input type="password" placeholder="Mot de passe" id="password">
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
 
     <div class="forgot">
       <a href="#">Mot de passe oublié ?</a>
     </div>
 
-    <button class="login-btn" disabled>Se connecter</button>
+    <button class="submit-btn" disabled>Se connecter</button>
 
     <div class="back-link" onclick="window.history.back()">Retour</div>
   </div>
 </main>
 
 <footer>
-  Tu n'as pas de compte ?<a href="#"> S'inscrire</a>
+  Tu n'as pas de compte ?<a href="#">S'inscrire</a>
 </footer>
 
 <script>
   function togglePassword() {
-    const input = document.getElementById("passwordField");
-    input.type = input.type === "password" ? "text" : "password";
+    const pwd = document.getElementById("password");
+    pwd.type = pwd.type === "password" ? "text" : "password";
   }
 </script>
 
