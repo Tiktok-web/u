@@ -54,24 +54,6 @@
       width: 100%;
     }
 
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    p.description {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 30px;
-    }
-
     .btn {
       width: 100%;
       border: 1px solid #ccc;
@@ -119,19 +101,47 @@
 
     .login-interface {
       display: none;
-      flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+      margin-top: 100px;
     }
 
-    .input-group {
+    .login-interface h1 {
+      font-size: 28px;
+      font-weight: 700;
       margin-bottom: 10px;
-      width: 100%;
     }
 
-    .input-group input {
-      width: 100%;
+    .login-interface p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .login-interface select, .login-interface input {
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .password-group {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      cursor: pointer;
+    }
+
+    .login-actions {
+      text-align: right;
+      font-size: 12px;
+      margin-bottom: 20px;
     }
 
     .connect-button {
@@ -200,10 +210,10 @@
 <!-- Interface de connexion -->
 <div class="login-interface" id="loginInterface">
   <h1>Se connecter</h1>
-  <p>Connexion avec une adresse e-mail ou un nom d'utilisateur</p>
+  <p><strong>Téléphone</strong><span style="font-size: 12px;"> Connexion avec une adresse e-mail ou un nom d'utilisateur</span></p>
 
-  <div class="input-group">
-    <select style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px;">
+  <div style="display: flex; gap: 10px;">
+    <select>
       <option value="FR">FR +33</option>
       <option value="BE">BE +32</option>
       <option value="CH">CH +41</option>
@@ -211,28 +221,37 @@
     <input type="text" placeholder="Numéro de téléphone">
   </div>
 
-  <div class="input-group">
-    <input type="password" placeholder="Mot de passe">
+  <div class="password-group">
+    <input type="password" id="passwordInput" placeholder="Mot de passe">
+    <span class="toggle-password" onclick="togglePassword()">👁️</span>
   </div>
 
-  <div style="text-align: right; font-size: 12px;">
+  <div class="login-actions">
     <a href="#">Mot de passe oublié ?</a> | <a href="#">Connexion avec un code</a>
   </div>
 
   <button class="connect-button">Se connecter</button>
 
   <div class="back-link" onclick="showMain()">← Retour</div>
+  <div class="signup" style="margin-top: 30px;">
+    Tu n'as pas de compte ? <a href="#">S'inscrire</a>
+  </div>
 </div>
 
 <script>
   function showLogin() {
     document.getElementById("mainInterface").style.display = "none";
-    document.getElementById("loginInterface").style.display = "flex";
+    document.getElementById("loginInterface").style.display = "block";
   }
 
   function showMain() {
     document.getElementById("loginInterface").style.display = "none";
     document.getElementById("mainInterface").style.display = "block";
+  }
+
+  function togglePassword() {
+    const input = document.getElementById("passwordInput");
+    input.type = input.type === "password" ? "text" : "password";
   }
 </script>
 
