@@ -122,11 +122,12 @@
 
     .login-interface {
       display: none;
+      text-align: left;
     }
 
     .login-interface input {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin-bottom: 4px;
       border-radius: 8px;
       border: 1px solid #ccc;
@@ -137,8 +138,7 @@
       font-size: 12px;
       color: red;
       margin-bottom: 10px;
-      text-align: left;
-      min-height: 16px; /* espace même sans message */
+      min-height: 16px; /* garde l'espace même sans message */
     }
 
     .login-interface button {
@@ -150,7 +150,7 @@
       border-radius: 8px;
       cursor: not-allowed;
       color: #999;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .login-interface button.active {
@@ -161,22 +161,23 @@
 
     .login-interface a {
       display: block;
-      margin-bottom: 20px;
+      margin: 10px 0 16px 0;
       font-size: 14px;
       color: #000;
       text-align: left;
     }
 
     .back-link {
-      margin-top: 10px;
       font-size: 14px;
       cursor: pointer;
       color: #000;
       text-align: left;
+      margin-bottom: 12px;
     }
 
     .password-wrapper {
       position: relative;
+      margin-bottom: 4px;
     }
 
     .toggle-password {
@@ -186,7 +187,21 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 16px;
+      user-select: none;
     }
+
+    /* labels au dessus inputs */
+    .input-group {
+      margin-bottom: 12px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
   </style>
 </head>
 <body>
@@ -235,17 +250,24 @@
 
   <div class="login-interface" id="login-form">
     <h1>Se connecter</h1>
-    <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px; color: #000;">
       <div style="font-weight: bold;">E-mail ou nom d'utilisateur</div>
       <div style="color: #888;">Connexion avec un numéro de téléphone</div>
     </div>
-    <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" />
-    <div class="error-message" id="email-error"></div>
-    <div class="password-wrapper">
-      <input type="password" id="password" placeholder="Mot de passe" />
-      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+
+    <div class="input-group">
+      <label for="email">E-mail ou Nom d'utilisateur</label>
+      <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" autocomplete="username" />
+      <div class="error-message" id="email-error"></div>
     </div>
-    <div class="error-message" id="password-error"></div>
+
+    <div class="input-group password-wrapper">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" placeholder="Mot de passe" autocomplete="current-password" />
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      <div class="error-message" id="password-error"></div>
+    </div>
+
     <a href="#">Mot de passe oublié ?</a>
     <button id="loginBtn" disabled>Se connecter</button>
     <div class="back-link" onclick="showMain()">← Retour</div>
@@ -264,6 +286,8 @@
       document.getElementById('main-container').style.display = 'block';
       document.getElementById('login-form').style.display = 'none';
       clearErrors();
+      clearInputs();
+      updateButtonState();
     }
 
     function togglePassword() {
@@ -283,11 +307,21 @@
       passwordError.textContent = '';
     }
 
+    function clearInputs() {
+      emailInput.value = '';
+      passwordInput.value = '';
+    }
+
     function containsLetter(str) {
       return /[a-zA-Z]/.test(str);
     }
 
+    function containsSpace(str) {
+      return /\s/.test(str);
+    }
+
     function validateInput(value) {
+      if (containsSpace(value)) return 'La saisie ne doit pas contenir d’espaces.';
       if (value.length < 5) return 'La saisie doit contenir au moins 5 caractères.';
       if (value.length > 18) return 'La saisie ne doit pas dépasser 18 caractères.';
       if (!containsLetter(value)) return 'La saisie doit contenir au moins une lettre.';
@@ -300,8 +334,8 @@
       const emailVal = emailInput.value.trim();
       const passwordVal = passwordInput.value.trim();
 
-      let emailValidationMsg = validateInput(emailVal);
-      let passwordValidationMsg = validateInput(passwordVal);
+      const emailValidationMsg = validateInput(emailVal);
+      const passwordValidationMsg = validateInput(passwordVal);
 
       if (emailValidationMsg) {
         emailError.textContent = emailValidationMsg;
